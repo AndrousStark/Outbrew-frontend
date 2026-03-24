@@ -268,7 +268,8 @@ export const followUpCopilotAPI = {
 };
 
 // Export default for convenience
-export default {
+const followUpAPIDefault = {
   ...followUpAPI,
   copilot: followUpCopilotAPI,
 };
+export default followUpAPIDefault;

@@ -286,8 +286,8 @@ export async function loadComponent<T>(
   if (delay > 0) {
     await new Promise((resolve) => setTimeout(resolve, delay))
   }
-  const module = await importFn()
-  return module.default
+  const imported = await importFn()
+  return imported.default
 }
 
 /**

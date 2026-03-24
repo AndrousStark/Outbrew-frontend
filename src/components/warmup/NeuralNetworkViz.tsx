@@ -255,9 +255,9 @@ export function NeuralNetworkViz({
   const [dimensions, setDimensions] = useState({ width: 800, height: 500 });
 
   // Use memberScore to generate accounts if not provided
-  const accounts = propAccounts || (memberScore !== undefined ? [
+  const accounts = useMemo(() => propAccounts || (memberScore !== undefined ? [
     { id: "1", email: "user@domain.com", tier: "premium", healthScore: memberScore },
-  ] : []);
+  ] : []), [propAccounts, memberScore]);
   const poolSize = propPoolSize || 1000;
   const networkStrength = propNetworkStrength || (memberScore ? memberScore / 100 * 95 : 85);
 
