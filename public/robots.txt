@@ -1,0 +1,50 @@
+User-agent: *
+Allow: /outbrew
+Allow: /outbrew/
+Allow: /outbrew/login
+Disallow: /outbrew/api/
+Disallow: /outbrew/_next/
+Disallow: /outbrew/dashboard
+Disallow: /outbrew/campaigns
+Disallow: /outbrew/settings
+Disallow: /outbrew/admin
+
+Sitemap: https://metaminds.store/outbrew/sitemap.xml
+
+User-agent: GPTBot
+Allow: /outbrew
+Allow: /outbrew/login
+
+User-agent: Google-Extended
+Allow: /outbrew
+
+User-agent: ChatGPT-User
+Allow: /outbrew
+
+User-agent: Bingbot
+Allow: /outbrew
+Crawl-delay: 1
+
+User-agent: Applebot
+Allow: /outbrew
+
+User-agent: anthropic-ai
+Allow: /outbrew
+
+User-agent: ClaudeBot
+Allow: /outbrew
+
+User-agent: PerplexityBot
+Allow: /outbrew
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
