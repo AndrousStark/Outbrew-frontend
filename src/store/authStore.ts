@@ -34,8 +34,28 @@ export const useAuthStore = create<AuthState>()(
         set({ token, user, isAuthenticated: true, isLoading: false });
       },
 
-      logout: () => {
+      logout: async () => {
+        // Call backend to blacklist the token server-side
+        try {
+          const token = sessionStorage.getItem("token");
+          if (token) {
+            await fetch(
+              `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1"}/auth/logout`,
+              {
+                method: "POST",
+                headers: {
+                  "Authorization": `Bearer ${token}`,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({}),
+              }
+            ).catch(() => {}); // Don't block logout on API failure
+          }
+        } catch {
+          // Ignore errors — still clear local state
+        }
         sessionStorage.removeItem("token");
+        sessionStorage.removeItem("auth-storage");
         set({ token: null, user: null, isAuthenticated: false, isLoading: false });
       },
 

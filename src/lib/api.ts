@@ -447,6 +447,15 @@ export const authAPI = {
 
   getSseTicket: () =>
     apiClient.post<{ ticket: string }>("/auth/sse-ticket"),
+
+  logout: (refreshToken?: string) =>
+    apiClient.post("/auth/logout", { refresh_token: refreshToken || null }),
+
+  verifyEmail: (token: string) =>
+    apiClient.get(`/auth/verify-email?token=${token}`),
+
+  resendVerification: (email: string) =>
+    apiClient.post("/auth/resend-verification", { email }),
 };
 
 // ============================================

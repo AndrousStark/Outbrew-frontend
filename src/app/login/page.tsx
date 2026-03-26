@@ -99,14 +99,15 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { login, setUser, token, _hasHydrated } = useAuthStore();
-  const setPlan = usePlanStore((s) => s.setPlan);
+  const syncFromUser = usePlanStore((s) => s.syncFromUser);
 
   useEffect(() => {
     setMounted(true);
-    // Capture plan from URL query param (?plan=free or ?plan=pro)
+    // Capture plan intent from URL query param (?plan=free or ?plan=pro)
+    // Actual plan is synced from backend after login via syncFromUser
     const planParam = searchParams.get("plan") as PlanTier | null;
     if (planParam === "free" || planParam === "pro") {
-      setPlan(planParam);
+      // Store intent for registration flow (not overriding backend plan)
     }
   }, [searchParams, setPlan]);
 
@@ -145,6 +146,9 @@ export default function LoginPage() {
       const userData: UserType = userRes.data;
 
       login(data.access_token, userData);
+
+      // Sync plan + usage + email_verified from backend
+      syncFromUser(userData as any);
 
       toast.success(`Welcome back, ${userData.full_name}!`, {
         icon: <Sparkles className="w-5 h-5 text-yellow-400" />,
@@ -239,6 +243,7 @@ export default function LoginPage() {
       const userRes = await authAPI.getMe();
       const userData: UserType = userRes.data;
       login(data.access_token, userData);
+      syncFromUser(userData as any);
 
       setShowRegister(false);
 
