@@ -5,6 +5,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { UsageBars as UsageBarsComponent } from "@/components/UsageBars";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
@@ -180,6 +181,9 @@ export function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle:
             );
           })}
         </nav>
+
+        {/* Usage Bars (only for free plan, hidden when collapsed) */}
+        {!collapsed && <UsageBarsComponent />}
 
         <div className={cn("border-t border-orange-500/10", collapsed ? "p-2" : "p-3")}>
           {collapsed ? (

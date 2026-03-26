@@ -459,6 +459,18 @@ export const authAPI = {
 };
 
 // ============================================
+// Usage & Plan API
+// ============================================
+
+export const usageAPI = {
+  getCurrent: () =>
+    apiClient.get<any>("/usage/"),
+
+  getLimits: () =>
+    apiClient.get<any>("/usage/limits"),
+};
+
+// ============================================
 // Admin Dashboard API (Super Admin only)
 // ============================================
 
