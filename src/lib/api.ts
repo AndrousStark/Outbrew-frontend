@@ -459,6 +459,30 @@ export const authAPI = {
 };
 
 // ============================================
+// Admin Dashboard API (Super Admin only)
+// ============================================
+
+export const adminAPI = {
+  getDashboard: () =>
+    apiClient.get<any>("/admin/dashboard"),
+
+  listUsers: (params?: { page?: number; page_size?: number; search?: string; plan_tier?: string; role?: string; verified?: boolean }) =>
+    apiClient.get<any>("/admin/users", { params }),
+
+  setUserPlan: (userId: number, plan: "free" | "pro") =>
+    apiClient.post<any>(`/admin/users/${userId}/set-plan?plan=${plan}`),
+
+  getAuditLogs: (params?: {
+    page?: number; page_size?: number; event_type?: string;
+    user_id?: number; username?: string; success?: boolean;
+    ip_address?: string; from_date?: string; to_date?: string;
+  }) => apiClient.get<any>("/admin/audit-logs", { params }),
+
+  getAuditStats: () =>
+    apiClient.get<any>("/admin/audit-stats"),
+};
+
+// ============================================
 // Applications API
 // ============================================
 
